@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="简体中文" />
+  </tags>
+  <strings>
+    <string id="GxhVR5XBTU" text="玩家担任 {SETTTLEMENT_NAME} 的总督" />
+    <string id="yJTIwVExFTU" text="玩家不再担任 {SETTTLEMENT_NAME} 的总督" />
+  </strings>
+</base>
