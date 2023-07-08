@@ -27,6 +27,7 @@ namespace PlayerGovernor
         {
             if (settlement == null 
                 || settlement.Town == null
+                || settlement.Town.Governor != null
                 || settlement.IsVillage 
                 || !Hero.MainHero.Equals(hero)
                 || !Clan.PlayerClan.Equals(settlement.OwnerClan))
