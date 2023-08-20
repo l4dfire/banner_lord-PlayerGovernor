@@ -6,9 +6,6 @@
 	<SingleplayerModule value="true"/>
 	<MultiplayerModule value="false"/>
 	<DependedModules>
-		<DependedModule Id="Native" DependentVersion="v1.2.0" />
-		<DependedModule Id="SandBoxCore" DependentVersion="v1.2.0" />
-		<DependedModule Id="Sandbox" DependentVersion="v1.2.0" />
 		<DependedModule Id="Bannerlord.Harmony"/>
 	</DependedModules>
 	<SubModules>
