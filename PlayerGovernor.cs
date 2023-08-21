@@ -15,7 +15,7 @@ namespace PlayerGovernor
         protected override void OnGameStart(Game game, IGameStarter starterObject)
         {
             new Harmony("HatDogPlayerGovernor").PatchAll();
-            InformationManager.DisplayMessage(new InformationMessage("Successfully loaded Player Governor", Colors.Green));
+            InformationManager.DisplayMessage(new InformationMessage("Successfully Loaded Player Governor", Colors.Green));
         }
     }
 
@@ -35,7 +35,8 @@ namespace PlayerGovernor
                 return;
             }
             MBTextManager.SetTextVariable("SETTTLEMENT_NAME", settlement.Name.ToString());
-            MBInformationManager.AddQuickInformation(new TextObject("{=GxhVR5XBTU} player governoring in : {SETTTLEMENT_NAME}"));
+            var name = Game.Current.PlayerTroop.Name ?? new TextObject("Player");
+            MBInformationManager.AddQuickInformation(new TextObject("{=GxhVR5XBTU}" + name + " Governing: {SETTTLEMENT_NAME}"));
             PlayerGovernorSetttlementAspect.governorSettlement = settlement.Town;
             return;
         }
@@ -57,7 +58,8 @@ namespace PlayerGovernor
                 return;
             }
             MBTextManager.SetTextVariable("SETTTLEMENT_NAME", mobileParty.CurrentSettlement.Name.ToString());
-            MBInformationManager.AddQuickInformation(new TextObject("{=yJTIwVExFTU} player is no longer the governor of : {SETTTLEMENT_NAME}"));
+            var name = Game.Current.PlayerTroop.Name ?? new TextObject("Player");
+            MBInformationManager.AddQuickInformation(new TextObject("{=yJTIwVExFTU}" + name + " No Longer Governing: {SETTTLEMENT_NAME}"));
             PlayerGovernorSetttlementAspect.governorSettlement = null;
         }
     }
