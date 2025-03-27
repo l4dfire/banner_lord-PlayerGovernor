@@ -2,7 +2,7 @@
 <Module>
 	<Name value="Player Governor"/>
 	<Id value="PlayerGovernor"/>
-	<Version value="v1.0.4"/>
+	<Version value="v1.0.5"/>
 	<SingleplayerModule value="true"/>
 	<MultiplayerModule value="false"/>
 	<DependedModules>
@@ -13,6 +13,7 @@
 			<Name value = "PlayerGovernor"/>
 			<DLLName value = "PlayerGovernor.dll"/>
 			<SubModuleClassType value = "PlayerGovernor.PlayerGovernorSubModule"/>
+			<Tags/>
 		</SubModule>
 	</SubModules>
 </Module>

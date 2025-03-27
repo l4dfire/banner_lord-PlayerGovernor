@@ -2,3 +2,5 @@
 bin/*
 obj/
 WorkshopUpdate.xml
+steam_appid.txt
+steam_workshop_uploader.txt

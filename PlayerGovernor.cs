@@ -12,7 +12,7 @@ namespace PlayerGovernor
 {
     public class PlayerGovernorSubModule : MBSubModuleBase
     {
-        protected override void OnGameStart(Game game, IGameStarter starterObject)
+        protected override void OnSubModuleLoad()
         {
             new Harmony("HatDogPlayerGovernor").PatchAll();
             InformationManager.DisplayMessage(new InformationMessage("Successfully Loaded Player Governor", Colors.Green));
@@ -25,18 +25,17 @@ namespace PlayerGovernor
         [HarmonyBefore]
         public static void Prefix(Hero hero, Settlement settlement)
         {
-            if (settlement == null 
-                || settlement.Town == null
-                || settlement.Town.Governor != null
-                || settlement.IsVillage 
-                || !Hero.MainHero.Equals(hero)
-                || !Clan.PlayerClan.Equals(settlement.OwnerClan))
+            if(settlement == null)
+            {
+                return;
+            }
+            if (settlement.Town == null || settlement.Town.Governor != null
+                || !Hero.MainHero.Equals(hero) || !Clan.PlayerClan.Equals(settlement.OwnerClan))
             {
                 return;
             }
             MBTextManager.SetTextVariable("SETTTLEMENT_NAME", settlement.Name.ToString());
-            var name = Game.Current.PlayerTroop.Name ?? new TextObject("Player");
-            MBInformationManager.AddQuickInformation(new TextObject("{=GxhVR5XBTU}" + name + " Governing: {SETTTLEMENT_NAME}"));
+            MBInformationManager.AddQuickInformation(new TextObject("{=GxhVR5XBTU}" + Hero.MainHero.Name + " Governing: {SETTTLEMENT_NAME}"));
             PlayerGovernorSetttlementAspect.governorSettlement = settlement.Town;
             return;
         }
@@ -45,21 +44,19 @@ namespace PlayerGovernor
     [HarmonyPatch(typeof(LeaveSettlementAction), "ApplyForParty")]
     class PlayerGovernorLeaveAspect
     {
-
         [HarmonyBefore]
         public static void Prefix(MobileParty mobileParty)
         {
-            if (mobileParty == null
+            if (PlayerGovernorSetttlementAspect.governorSettlement == null
+                || mobileParty == null
                 || mobileParty.CurrentSettlement == null
-                || mobileParty.CurrentSettlement.Town == null
                 || !Hero.MainHero.Equals(mobileParty.LeaderHero)
-                || !mobileParty.CurrentSettlement.Town.Equals(PlayerGovernorSetttlementAspect.governorSettlement))
+                || !PlayerGovernorSetttlementAspect.governorSettlement.Equals(mobileParty.CurrentSettlement.Town))
             {
                 return;
             }
             MBTextManager.SetTextVariable("SETTTLEMENT_NAME", mobileParty.CurrentSettlement.Name.ToString());
-            var name = Game.Current.PlayerTroop.Name ?? new TextObject("Player");
-            MBInformationManager.AddQuickInformation(new TextObject("{=yJTIwVExFTU}" + name + " No Longer Governing: {SETTTLEMENT_NAME}"));
+            MBInformationManager.AddQuickInformation(new TextObject("{=yJTIwVExFTU}" + Hero.MainHero.Name + " No Longer Governing: {SETTTLEMENT_NAME}"));
             PlayerGovernorSetttlementAspect.governorSettlement = null;
         }
     }
